@@ -1,0 +1,35 @@
+<div class="container">
+    <h3>Enter a name:</h3>
+    <input type="text" [(ngModel)]="human.name">
+    <h3>Enter a age:</h3>
+    <input type="number" [(ngModel)]="human.age">
+    <br>
+    <br>
+    <button (click)="addHuman()">add a human</button>
+</div>
+<hr>
+<div class="container" *ngIf="humans.length">
+    <ul>
+        <li>
+            <ul class="clearfix tab">
+                <li>姓名</li>
+                <li>年龄</li>
+                <li>操作</li>
+            </ul>
+        </li>
+        <li *ngFor="let human of humans">
+            <ul class="clearfix tab">
+                <li (dblclick)="modifyHuman(human)">{{human.name}} <input class="cover covername" *ngIf="human.modifying" type="text" [(ngModel)]="human.name"></li>
+                <li (dblclick)="modifyHuman(human)">{{human.age}} <input class="cover coverage" *ngIf="human.modifying" type="number" [(ngModel)]="human.age"></li>
+                <li>
+                    <button (click)="deleteHuman(human.id)">删除</button>
+                    <button (click)="modifyHuman(human)">修改</button>
+                    <div *ngIf="human.modifying" class="cover coverbutton">
+                        <button (click)="confirm(human)">确定</button>
+                        <button (click)="cancel(human)">取消</button>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
